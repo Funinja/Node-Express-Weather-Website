@@ -44,11 +44,32 @@ app.get('/help', (req, res) => {
 
 
 app.get('/weather', (req, res) => {
+
+    if (!req.query.address) {
+        return res.send({
+            error:'You must provide a search term'
+        })
+    }
+
     res.send({
+        address: req.query.address,
         weather: 27,
         feelslike: 6
     });
 })
+
+app.get('/products', (req, res) => {
+    if (!req.query.search) {
+        return res.send({
+            error:'You must provide a search term'
+        })
+    }else{
+        console.log(req.query.search);
+        res.send ({
+            products: []
+        })
+    }
+});
 
 app.get('/help/*', (req, res) => {
     res.render('error', {
