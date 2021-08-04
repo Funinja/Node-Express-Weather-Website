@@ -50,6 +50,23 @@ app.get('/weather', (req, res) => {
     });
 })
 
+app.get('/help/*', (req, res) => {
+    res.render('error', {
+        title: '404',
+        name: 'Dennis Lam',
+        errorMessage: 'Help article not found.'
+    });
+})
+
+app.get('*', (req, res) => { //must be last so express can check each other handler first
+    // res.send('My 404 page');
+    res.render('error', {
+        title: '404',
+        name: 'Dennis Lam',
+        errorMessage: 'Page not found.'
+    });
+});
+
 app.listen(3000, () => {
     console.log('Server is up on port 3000.');
 });
